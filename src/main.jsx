@@ -1,11 +1,14 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router";
-import "./index.css";
-import Router from "./Router/Router";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={Router} />
-  </StrictMode>
+import { ToastContainer } from "react-toastify";
+import "./index.css";
+import { router } from "./Router/Router";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+    <ToastContainer position="top-center" />
+  </React.StrictMode>
 );
