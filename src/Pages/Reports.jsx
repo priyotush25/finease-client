@@ -24,9 +24,7 @@ const Reports = () => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
   const [balance, setBalance] = useState(0);
-
-  const [selectedMonth, setSelectedMonth] = useState(""); // YYYY-MM
-
+  const [selectedMonth, setSelectedMonth] = useState("");
   // Fetch all transactions from server
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -34,7 +32,7 @@ const Reports = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/transactions?email=${user.email}`
+          `https://finease-server-chi.vercel.app/transactions?email=${user.email}`
         );
         const txs = res.data.map((tx) => ({
           ...tx,
@@ -52,25 +50,25 @@ const Reports = () => {
     fetchTransactions();
   }, [user]);
 
-  // Filter transactions and calculate totals & balance
+  // Filter transactions
   useEffect(() => {
     if (!allTransactions) return;
 
-    // Filter by selected month
     const filteredTxs = selectedMonth
-      ? allTransactions.filter(
-          (tx) =>
-            tx.date.getFullYear() === Number(selectedMonth.split("-")[0]) &&
-            tx.date.getMonth() + 1 === Number(selectedMonth.split("-")[1])
-        )
+      ? allTransactions.filter((tx) => {
+          const txMonth = tx.date.getMonth() + 1; // 1-12
+          const txYear = tx.date.getFullYear();
+          const [year, month] = selectedMonth.split("-").map(Number);
+          return txYear === year && txMonth === month;
+        })
       : allTransactions;
 
     setTransactions(filteredTxs);
 
-    // Calculate totals
     const income = filteredTxs
       .filter((tx) => tx.type === "income")
       .reduce((acc, tx) => acc + tx.amount, 0);
+
     const expense = filteredTxs
       .filter((tx) => tx.type === "expense")
       .reduce((acc, tx) => acc + tx.amount, 0);
@@ -80,7 +78,7 @@ const Reports = () => {
     setBalance(income - expense);
   }, [allTransactions, selectedMonth]);
 
-  // Prepare data for charts
+  // Category pie chart
   const categoryMap = {};
   transactions.forEach((tx) => {
     if (categoryMap[tx.category]) categoryMap[tx.category] += tx.amount;
@@ -100,6 +98,7 @@ const Reports = () => {
     "#e74c3c",
   ];
 
+  // Monthly totals for bar chart
   const monthlyMap = {};
   transactions.forEach((tx) => {
     const month = tx.date.toLocaleString("default", {
@@ -115,7 +114,7 @@ const Reports = () => {
   }));
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6">
+    <div className="min-h-screen flex flex-col items-center justify-start p-6 bg-gray-100">
       <div className="w-full max-w-6xl card shadow-xl p-6 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white">
         <h2 className="text-3xl font-bold mb-6 text-center">Reports</h2>
 

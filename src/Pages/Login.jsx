@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="mt-10 flex items-center justify-center ">
       {/* -------- Gradient Box -------- */}
       <div className="card w-full max-w-md shadow-xl p-8 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white">
         <h2 className="text-3xl font-bold text-center mb-6">Login</h2>

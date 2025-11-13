@@ -43,13 +43,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="btn bg-white text-green-700 hover:bg-green-100 border-none"
+                  className="btn bg-white text-green-700 border border-transparent hover:bg-transparent hover:text-white hover:border-white"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="btn btn-outline border-white text-white hover:bg-green-100"
+                  className="btn btn-outline border-white text-white hover:bg-green-100 hover:text-green-600"
                 >
                   Register
                 </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
                   <li>
                     <button
                       onClick={logout}
-                      className="btn btn-sm w-full bg-green-500 text-white hover:bg-green-600 border-none"
+                      className="btn btn-sm w-full bg-green-500 text-white hover:bg-green-600 hover:text-black border-none"
                     >
                       Log out
                     </button>

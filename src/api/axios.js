@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:5000", // your server URL
+  baseURL: "https://finease-server-chi.vercel.app", // your server URL
 });

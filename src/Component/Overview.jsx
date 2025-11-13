@@ -16,7 +16,7 @@ const Overview = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/transactions?email=${user.email}`
+          `https://finease-server-chi.vercel.app/transactions?email=${user.email}`
         );
 
         const transactions = res.data.map((tx) => ({
