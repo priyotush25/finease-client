@@ -36,7 +36,7 @@ FinEase is a **personal finance management web application** that helps users ma
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/finease-client.git
+https://github.com/priyotush25/finease-client.git
    ```
    Install dependencies:
 
