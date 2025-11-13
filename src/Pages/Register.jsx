@@ -21,7 +21,7 @@ const Register = () => {
     try {
       await signup(email, password, name);
       toast.success("Registered successfully!");
-      navigate("/"); // Redirect after register
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -44,7 +44,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
+      {/* -------- Gradient Card -------- */}
       <div className="card w-full max-w-md shadow-xl p-8 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white">
         <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
 
@@ -75,7 +76,7 @@ const Register = () => {
           />
           <button
             type="submit"
-            className="btn bg-white text-green-700 hover:bg-gray-100 border-none w-full"
+            className="btn bg-white text-green-700 hover:bg-gray-100 hover:text-green-500 border-none w-full"
             disabled={loading}
           >
             {loading ? "Registering..." : "Register"}
