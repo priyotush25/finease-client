@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
 
@@ -10,16 +10,35 @@ const Register = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [photoURL, setPhotoURL] = useState(""); // <-- photoURL input
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // -------- Email/Password Signup --------
+  // Password Validation
+  const validatePassword = (password) => {
+    const errors = [];
+    if (!/[A-Z]/.test(password))
+      errors.push("Password must have an uppercase letter");
+    if (!/[a-z]/.test(password))
+      errors.push("Password must have a lowercase letter");
+    if (password.length < 6)
+      errors.push("Password must be at least 6 characters");
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    const errors = validatePassword(password);
+    if (errors.length > 0) {
+      errors.forEach((err) => toast.error(err));
+      setLoading(false);
+      return;
+    }
+
     try {
-      await signup(email, password, name);
+      await signup(email, password, name, photoURL); // <-- pass photoURL
       toast.success("Registered successfully!");
       navigate("/");
     } catch (error) {
@@ -29,7 +48,7 @@ const Register = () => {
     }
   };
 
-  // -------- Google Signup/Login --------
+  // Google login
   const handleGoogleSignup = async () => {
     setLoading(true);
     try {
@@ -45,7 +64,6 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      {/* -------- Gradient Card -------- */}
       <div className="card w-full max-w-md shadow-xl p-8 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white">
         <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
 
@@ -53,7 +71,7 @@ const Register = () => {
           <input
             type="text"
             placeholder="Full Name"
-            className="input input-bordered w-full bg-white text-black focus:border-green-500 focus:ring-green-500"
+            className="input input-bordered w-full bg-white text-black"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -61,22 +79,30 @@ const Register = () => {
           <input
             type="email"
             placeholder="Email"
-            className="input input-bordered w-full bg-white text-black focus:border-green-500 focus:ring-green-500"
+            className="input input-bordered w-full bg-white text-black"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
+            type="text"
+            placeholder="Profile Photo URL"
+            className="input input-bordered w-full bg-white text-black"
+            value={photoURL}
+            onChange={(e) => setPhotoURL(e.target.value)}
+          />
+          <input
             type="password"
             placeholder="Password"
-            className="input input-bordered w-full bg-white text-black focus:border-green-500 focus:ring-green-500"
+            className="input input-bordered w-full bg-white text-black"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button
             type="submit"
-            className="btn bg-white text-green-700 hover:bg-gray-100 hover:text-green-500 border-none w-full"
+            className="btn bg-white text-green-700 hover:bg-gray-100 border-none w-full"
             disabled={loading}
           >
             {loading ? "Registering..." : "Register"}
@@ -95,6 +121,13 @@ const Register = () => {
           <FcGoogle size={20} />
           Continue with Google
         </button>
+
+        <p className="mt-4 text-center text-white">
+          Already have an account?{" "}
+          <Link to="/login" className="text-yellow-300 hover:underline">
+            Login here
+          </Link>
+        </p>
       </div>
     </div>
   );

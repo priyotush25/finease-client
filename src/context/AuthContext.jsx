@@ -10,20 +10,21 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { auth, googleProvider } from "../firebase/firebase.config";
 
-// 1️⃣ Create Context
 const AuthContext = createContext();
 
-// 2️⃣ AuthProvider
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // -------- Signup --------
-  const signup = async (email, password, displayName) => {
+  // -------- Signup with photoURL --------
+  const signup = async (email, password, displayName, photoURL) => {
     setLoading(true);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, { displayName });
+      await updateProfile(auth.currentUser, {
+        displayName,
+        photoURL: photoURL || null,
+      });
       toast.success("Signup successful!");
     } catch (error) {
       toast.error(error.message);
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // -------- Login with Email/Password --------
+  // -------- Login --------
   const login = async (email, password) => {
     setLoading(true);
     try {
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // -------- Login with Google --------
+  // -------- Google Login --------
   const loginWithGoogle = async () => {
     setLoading(true);
     try {
@@ -100,19 +101,21 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // -------- Context Value --------
-  const value = {
-    user,
-    loading,
-    signup,
-    login,
-    loginWithGoogle,
-    logout,
-    updateUserProfile,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        signup,
+        login,
+        loginWithGoogle,
+        logout,
+        updateUserProfile,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-// 3️⃣ Custom Hook
 export const useAuth = () => useContext(AuthContext);
