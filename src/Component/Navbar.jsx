@@ -1,6 +1,17 @@
 import { Link, NavLink } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white shadow-lg">
       <div className="container mx-auto px-4">
@@ -42,9 +53,11 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/reports">Reports</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/profile">Profile</NavLink>
-                </li>
+                {user && (
+                  <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -54,7 +67,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ---------- Navbar Center (Desktop Links) ---------- */}
+          {/* ---------- Navbar Center ---------- */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 font-medium">
               <li>
@@ -69,20 +82,54 @@ const Navbar = () => {
               <li>
                 <NavLink to="/reports">Reports</NavLink>
               </li>
-              <li>
-                <NavLink to="/profile">Profile</NavLink>
-              </li>
+              {user && (
+                <li>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+              )}
             </ul>
           </div>
 
-          {/* ---------- Navbar End (Login Button) ---------- */}
-          <div className="navbar-end">
-            <Link
-              to="/login"
-              className="btn bg-white text-green-700 hover:bg-green-100 border-none"
-            >
-              Login
-            </Link>
+          {/* ---------- Navbar End ---------- */}
+          <div className="navbar-end flex items-center gap-2">
+            {!user ? (
+              <>
+                <Link
+                  to="/login"
+                  className="btn bg-white text-green-700 hover:bg-green-100 border-none"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn btn-outline border-white text-white hover:bg-green-100"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <>
+                {/* Profile Avatar */}
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full border-2 border-white hover:border-yellow-400 transition-colors"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-white text-green-700 flex items-center justify-center font-bold hover:text-yellow-400 transition-colors cursor-pointer">
+                    {user.displayName ? user.displayName.charAt(0) : "U"}
+                  </div>
+                )}
+
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-outline border-white text-white hover:bg-green-100"
+                >
+                  Logout
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
