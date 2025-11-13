@@ -1,142 +1,103 @@
-import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { api } from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 
 const AddTransaction = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
-  const [type, setType] = useState("Income");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    type: "income",
+    category: "",
+    amount: "",
+    description: "",
+    date: "",
+  });
 
-  const categories = {
-    Income: ["Salary", "Freelance", "Investment", "Other"],
-    Expense: ["Food", "Rent", "Shopping", "Utilities", "Other"],
-  };
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    if (!category || !amount || !date) {
-      toast.error("Please fill all required fields");
-      setLoading(false);
-      return;
-    }
-
-    const transaction = {
-      type,
-      category,
-      amount: Number(amount),
-      description,
-      date,
-      userEmail: user?.email,
-      userName: user?.displayName,
-    };
-
     try {
-      // Replace with your backend endpoint
-      await axios.post("http://localhost:5000/transactions", transaction);
-      toast.success("Transaction added successfully!");
-      // Clear form
-      setType("Income");
-      setCategory("");
-      setAmount("");
-      setDescription("");
-      setDate("");
+      await api.post("/transactions", {
+        ...form,
+        userEmail: user.email,
+        userName: user.displayName,
+      });
+      toast.success("Transaction added!");
+      navigate("/my-transactions");
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
-    } finally {
-      setLoading(false);
+      toast.error("Failed to add transaction");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="card w-full max-w-lg shadow-xl p-8 bg-white rounded-2xl">
-        <h2 className="text-2xl font-bold text-green-700 text-center mb-6">
-          Add Transaction
-        </h2>
-
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          {/* Type */}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+      <div className="card p-8 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">Add Transaction</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <select
-            className="select select-bordered w-full"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
+            name="type"
+            value={form.type}
+            onChange={handleChange}
+            className="input input-bordered w-full text-black"
           >
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
           </select>
-
-          {/* Category */}
-          <select
-            className="select select-bordered w-full"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">Select Category</option>
-            {categories[type].map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-
-          {/* Amount */}
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            value={form.category}
+            onChange={handleChange}
+            className="input input-bordered w-full text-black"
+            required
+          />
           <input
             type="number"
+            name="amount"
             placeholder="Amount"
-            className="input input-bordered w-full"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={form.amount}
+            onChange={handleChange}
+            className="input input-bordered w-full text-black"
             required
           />
-
-          {/* Description */}
-          <textarea
+          <input
+            type="text"
+            name="description"
             placeholder="Description"
-            className="textarea textarea-bordered w-full"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={form.description}
+            onChange={handleChange}
+            className="input input-bordered w-full text-black"
+            required
           />
-
-          {/* Date */}
           <input
             type="date"
-            className="input input-bordered w-full"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            name="date"
+            value={form.date}
+            onChange={handleChange}
+            className="input input-bordered w-full text-black"
             required
           />
-
-          {/* User Email & Name (Read-only) */}
           <input
             type="text"
-            placeholder="User Email"
-            className="input input-bordered w-full bg-gray-100"
-            value={user?.email || ""}
+            value={user.displayName}
             readOnly
+            className="input input-bordered w-full bg-gray-200 text-black"
           />
           <input
-            type="text"
-            placeholder="User Name"
-            className="input input-bordered w-full bg-gray-100"
-            value={user?.displayName || ""}
+            type="email"
+            value={user.email}
             readOnly
+            className="input input-bordered w-full bg-gray-200 text-black"
           />
-
-          {/* Submit Button */}
           <button
             type="submit"
-            className={`btn w-full bg-green-600 text-white hover:bg-green-700 border-none ${
-              loading ? "loading" : ""
-            }`}
-            disabled={loading}
+            className="btn bg-white text-green-700 hover:bg-gray-100"
           >
             Add Transaction
           </button>
