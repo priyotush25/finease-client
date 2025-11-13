@@ -2,20 +2,14 @@ import { Outlet } from "react-router";
 import Footer from "../Component/Footer";
 import Navbar from "../Component/Navbar";
 
-const RootLayout = () => {
+export default function RootLayout() {
   return (
-    <>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <div className="flex flex-1">
-          <main className="flex-1 p-4">
-            <Outlet />
-          </main>
-        </div>
-        <Footer />
-      </div>
-    </>
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <Navbar />
+      <main className="flex-grow container mx-auto px-4 py-6">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
-};
-
-export default RootLayout;
+}
