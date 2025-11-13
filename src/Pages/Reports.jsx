@@ -17,6 +17,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Reports = () => {
   const { user } = useAuth();
+  const [allTransactions, setAllTransactions] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,6 +27,7 @@ const Reports = () => {
 
   const [selectedMonth, setSelectedMonth] = useState(""); // YYYY-MM
 
+  // Fetch all transactions from server
   useEffect(() => {
     const fetchTransactions = async () => {
       if (!user) return;
@@ -39,29 +41,7 @@ const Reports = () => {
           amount: Number(tx.amount),
           date: new Date(tx.date),
         }));
-
-        // Filter by month if selected
-        const filteredTxs = selectedMonth
-          ? txs.filter(
-              (tx) =>
-                tx.date.getFullYear() === Number(selectedMonth.split("-")[0]) &&
-                tx.date.getMonth() + 1 === Number(selectedMonth.split("-")[1])
-            )
-          : txs;
-
-        setTransactions(filteredTxs);
-
-        const income = filteredTxs
-          .filter((tx) => tx.type === "income")
-          .reduce((acc, tx) => acc + tx.amount, 0);
-
-        const expense = filteredTxs
-          .filter((tx) => tx.type === "expense")
-          .reduce((acc, tx) => acc + tx.amount, 0);
-
-        setTotalIncome(income);
-        setTotalExpense(expense);
-        setBalance(income - expense);
+        setAllTransactions(txs);
       } catch (error) {
         toast.error("Failed to fetch transactions");
       } finally {
@@ -70,21 +50,46 @@ const Reports = () => {
     };
 
     fetchTransactions();
-  }, [user, selectedMonth]);
+  }, [user]);
+
+  // Filter transactions and calculate totals & balance
+  useEffect(() => {
+    if (!allTransactions) return;
+
+    // Filter by selected month
+    const filteredTxs = selectedMonth
+      ? allTransactions.filter(
+          (tx) =>
+            tx.date.getFullYear() === Number(selectedMonth.split("-")[0]) &&
+            tx.date.getMonth() + 1 === Number(selectedMonth.split("-")[1])
+        )
+      : allTransactions;
+
+    setTransactions(filteredTxs);
+
+    // Calculate totals
+    const income = filteredTxs
+      .filter((tx) => tx.type === "income")
+      .reduce((acc, tx) => acc + tx.amount, 0);
+    const expense = filteredTxs
+      .filter((tx) => tx.type === "expense")
+      .reduce((acc, tx) => acc + tx.amount, 0);
+
+    setTotalIncome(income);
+    setTotalExpense(expense);
+    setBalance(income - expense);
+  }, [allTransactions, selectedMonth]);
 
   // Prepare data for charts
-  const categoryData = [];
   const categoryMap = {};
   transactions.forEach((tx) => {
-    if (categoryMap[tx.category]) {
-      categoryMap[tx.category] += tx.amount;
-    } else {
-      categoryMap[tx.category] = tx.amount;
-    }
+    if (categoryMap[tx.category]) categoryMap[tx.category] += tx.amount;
+    else categoryMap[tx.category] = tx.amount;
   });
-  for (const key in categoryMap) {
-    categoryData.push({ name: key, value: categoryMap[key] });
-  }
+  const categoryData = Object.keys(categoryMap).map((key) => ({
+    name: key,
+    value: categoryMap[key],
+  }));
 
   const COLORS = [
     "#0088FE",
@@ -95,7 +100,6 @@ const Reports = () => {
     "#e74c3c",
   ];
 
-  // Monthly totals for bar chart
   const monthlyMap = {};
   transactions.forEach((tx) => {
     const month = tx.date.toLocaleString("default", {
