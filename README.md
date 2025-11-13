@@ -1,16 +1,40 @@
-# React + Vite
+# FinEase 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [https://your-live-site-url.com](https://your-live-site-url.com)
 
-Currently, two official plugins are available:
+FinEase is a **personal finance management web application** that helps users manage their income, expenses, and savings goals efficiently. Users can track their transactions, set budgets, and visualize their financial data through insightful charts and reports. This project demonstrates **CRUD operations, user authentication, backend integration, and data visualization**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **User Authentication:** Secure login and registration with email/password and Google login.
+- **Add Transactions:** Users can add income or expense transactions with category, amount, date, and description.
+- **My Transactions:** View, update, or delete personal transactions in a card-based layout.
+- **Reports & Analytics:** Visual charts (Pie and Bar) to show income vs expenses and category-wise summaries.
+- **Responsive Design:** Fully responsive for mobile, tablet, and desktop screens.
+- **Dark/Light Mode:** Switch between dark and light themes for better user experience.
+- **Profile Management:** Users can view and update their profile information.
+- **Error & Success Notifications:** Using Toast/SweetAlert for user-friendly alerts.
+- **404 Page:** A custom 404 Not Found page for invalid routes.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- **Frontend:** React, Tailwind CSS, React Router DOM, React Toastify
+- **Backend:** Node.js, Express.js (if integrated)
+- **Database:** MongoDB
+- **Authentication:** Firebase Authentication
+- **Charts:** Recharts for data visualization
+- **Deployment:** Netlify / Vercel (client and server side)
+- **Other Packages:** SweetAlert2, clsx
+
+---
+
+## How to Run Locally
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/finease-client.git
+   ```
