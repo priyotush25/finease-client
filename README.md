@@ -1,6 +1,6 @@
 # FinEase 💰
 
-**Live Site:** [https://your-live-site-url.com](https://your-live-site-url.com)
+**Live Site:** https://finease-priyo.netlify.app
 
 FinEase is a **personal finance management web application** that helps users manage their income, expenses, and savings goals efficiently. Users can track their transactions, set budgets, and visualize their financial data through insightful charts and reports. This project demonstrates **CRUD operations, user authentication, backend integration, and data visualization**.
 
