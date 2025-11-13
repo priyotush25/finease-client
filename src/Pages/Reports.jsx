@@ -115,7 +115,7 @@ const Reports = () => {
   }));
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6 bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-start p-6">
       <div className="w-full max-w-6xl card shadow-xl p-6 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white">
         <h2 className="text-3xl font-bold mb-6 text-center">Reports</h2>
 

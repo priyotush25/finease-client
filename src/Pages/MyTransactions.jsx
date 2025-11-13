@@ -40,7 +40,7 @@ const MyTransactions = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 flex flex-col items-center">
+    <div className="min-h-screen p-6 flex flex-col items-center">
       <h2 className="text-3xl font-bold mb-6 text-green-800">
         My Transactions
       </h2>

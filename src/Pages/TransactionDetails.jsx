@@ -26,7 +26,7 @@ const TransactionDetails = () => {
   if (!tx) return <p className="text-center mt-6">Transaction not found</p>;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6 bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-start p-6 ">
       <div className="card w-full max-w-md p-6 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Transaction Details

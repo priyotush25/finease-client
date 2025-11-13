@@ -48,7 +48,7 @@ const UpdateTransaction = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <div className="card p-8 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-white shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">
           Update Transaction
