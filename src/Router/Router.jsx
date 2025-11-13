@@ -11,6 +11,7 @@ import Reports from "../Pages/Reports";
 import TransactionDetails from "../Pages/TransactionDetails";
 import UpdateTransaction from "../Pages/UpdateTransaction";
 import RootLayout from "../RootLayout/RootLayout";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,30 +21,57 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+
+      // Protected Routes
       {
         path: "/add-transaction",
-        element: <AddTransaction />,
+        element: (
+          <PrivateRoute>
+            <AddTransaction />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-transactions",
-        element: <MyTransactions />,
+        element: (
+          <PrivateRoute>
+            <MyTransactions />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/transaction/update/:id",
-        element: <UpdateTransaction />,
+        element: (
+          <PrivateRoute>
+            <UpdateTransaction />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/transaction/:id",
-        element: <TransactionDetails />,
+        element: (
+          <PrivateRoute>
+            <TransactionDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/reports",
-        element: <Reports />,
+        element: (
+          <PrivateRoute>
+            <Reports />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
+
       { path: "*", element: <NotFound /> },
     ],
   },
