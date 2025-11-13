@@ -38,3 +38,15 @@ FinEase is a **personal finance management web application** that helps users ma
    ```bash
    git clone https://github.com/your-username/finease-client.git
    ```
+   Install dependencies:
+
+cd finease-client
+npm install
+
+Add .env file in the root with your Firebase credentials.
+
+Run the development server:
+
+npm run dev
+
+Open http://localhost:5173 in your browser.
