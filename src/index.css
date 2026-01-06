@@ -1,0 +1,54 @@
+<<<<<<< HEAD
+@import "tailwindcss";
+@plugin "daisyui";
+=======
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+@import "tailwindcss";
+
+/* DaisyUI configuration */
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+/* Light Theme */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #22c55e;          /* Green primary */
+  --color-secondary: #0d1b2a;        /* Keep dark/nav background */
+  --color-accent: #22c55e66;         /* Light green accent */
+  --color-accent-content: #fff;      /* Text on accent */
+  --color-neutral: #f5f5f5;
+  --color-info: #1f2937;             /* Info text color */
+}
+
+/* Dark Theme */
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: #22c55e;          /* Green primary */
+  --color-secondary: white;
+  --color-accent: #22c55e66;         /* Light green accent */
+  --color-accent-content: black;
+  --color-neutral: #545454;
+  --color-info: #d1fae5;             /* Light green info text */
+}
+
+/* Custom Menu Styles */
+.header-menu .active {
+  border: 2px solid #22c55e;        /* Green border */
+  color: #22c55e;                   /* Green text */
+  padding: 4px 8px;
+  @apply rounded-full;
+}
+
+.drop-menu .active {
+  background-color: #22c55e66;      /* Light green background */
+}
+
+
+*{
+   font-family: "Inter", sans-serif;
+}
+>>>>>>> c52945d (update all)
