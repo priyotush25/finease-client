@@ -1,95 +1,16 @@
+# React + Vite
 
-# FinEase 💰
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Description:
-FinEase is a **personal finance management web application** that helps users manage their income, expenses, and savings goals efficiently. Users can track their transactions, set budgets, and visualize their financial data through insightful charts and reports. This project demonstrates **CRUD operations, user authentication, backend integration, and data visualization**.
+Currently, two official plugins are available:
 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# Live project link.
+## React Compiler
 
-[View Live Project](hthttps://finease-priyo.netlify.app)
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Expanding the ESLint configuration
 
-
-
-## Tech Stack
-
-**Frontend**: React, Tailwind CSS, React Router DOM, React Toastify
-
-**Backend**: Node.js, Express.js (if integrated)
-
-**Database**: MongoDB
-
-**Authentication**: Firebase Authentication
-
-**Charts**: Recharts for data visualization
-
-**Deployment**: Netlify / Vercel (client and server side)
-
-**Other** Packages: SweetAlert2
-
-
-## Features
-
-- User Auth: Secure login/signup with email & Google.
-
-- Add Transactions: Income/expense with category, amount, date, description.
-
-- My Transactions: View, edit, or delete transactions.
-
-- Reports & Analytics: Pie & Bar charts for income/expense summaries.
-
-- Responsive Design: Works on mobile, tablet, and desktop.
-
-- Profile Management: View/update profile info.
-
-- Notifications: Toast/SweetAlert alerts.
-
-- 404 Page: Custom Not Found page for invalid routes.
-
-## 📦 Dependencies
-- react
-- react-dom
-- react-scripts
-- tailwindcss
-- framer-motion
-- @vitejs/plugin-react (if using Vite)
-
-
-## Installation
-
-Follow these steps to run the project on your local machine:
-
-```bash
-
-1. **Clone the repository**
-
-git clone https://github.com/priyotush25/finease-client.git
-cd hero-io
-
-
-2. **Install dependencies**
-
-npm install
-
-
-3. **Run the project**
-
-npm start
-
-This will start the app locally at http://localhost:3000.
-
-
-4. **Build for production**
-
-npm run build
-
-
-```
-    
-## Additional Resources
-
-- [React Documentation](https://reactjs.org/docs/getting-started.html)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [React Router DOM](https://reactrouter.com/start/data/installation/)
-
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
