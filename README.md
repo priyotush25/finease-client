@@ -1,16 +1,53 @@
-# React + Vite
+# FinEase — Personal Finance Management Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Live Website  
+**Client:** https://fineease-fe3d1.web.app
 
-Currently, two official plugins are available:
+FinEase is a personal finance management web application where users can manage their income, expenses, and savings goals. The platform allows users to record transactions, set budgets, and view financial summaries with insightful charts and reports.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Project Theme
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+FinEase helps users build better money-management habits by letting them:
 
-## Expanding the ESLint configuration
+- Track daily income and expenses  
+- Store and organize all financial records  
+- Get instant financial summaries  
+- Visualize spending patterns  
+- Maintain complete privacy and security of their data  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Key Features
+
+- ✔️ **User-specific dashboard** — Every user can view only their own income and expense data.  
+- ✔️ **Add, update & delete transactions** in an easy and smooth interface.  
+- ✔️ **Dynamic financial summary charts** using Recharts on Home & Report pages.  
+- ✔️ **Fully secure backend** — No user can view another user’s transaction data.  
+- ✔️ **Transaction details page** with expanded and clean information.  
+- ✔️ **Modern, responsive UI** built with Tailwind CSS & DaisyUI.  
+- ✔️ **Beautiful alerts and notifications** powered by React Hot Toast, SweetAlert2, and React Toastify.  
+- ✔️ **Smooth navigation** implemented with React Router.  
+
+---
+
+## Tech Stack & NPM Packages
+
+### **Client (React.js)**
+- React  
+- Tailwind CSS  
+- DaisyUI  
+- React Router DOM  
+- React Icons  
+- SweetAlert2  
+- React Hot Toast  
+- React-Toastify  
+- Recharts  
+- Uiverse Components  
+
+### **Server (Node.js + MongoDB)**
+- Node.js  
+- Express.js  
+- MongoDB  
+- Firebase Authentication  
