@@ -18,7 +18,7 @@ const Footer = () => {
                         
                         <div className='mt-4'>
                             <h3 className='text-2xl font-black text-emerald-500'>Bank Town</h3>
-                            <p className='text-emerald-100/60 font-medium'>Savar, Dhaka (DHA). Bangladesh.</p>
+                            <p className='text-emerald-100/60 font-medium'>Sylhet. Bangladesh.</p>
                         </div>
 
                         <div className='space-y-3 pt-2'>
